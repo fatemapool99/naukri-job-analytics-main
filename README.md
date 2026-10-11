@@ -1,40 +1,83 @@
-# Naukri Job Analytics
+## Naukri Job Analytics
 
-A data engineering and analytics project that scrapes job listings from Naukri, stores the raw data in PostgreSQL, and transforms it into a clean dataset for analysis.
+An end-to-end data engineering project that scrapes job listings from Naukri.com, stores them in PostgreSQL, and enables SQL-based job market analysis.
 
-## 🚀 Project Overview
+##  Tech Stack
 
-This project demonstrates a simple ETL pipeline:
+* **Python & Selenium** — Web scraping and data extraction
+* **CSV** — Intermediate data storage
+* **PostgreSQL** — Data storage and querying
+* **Docker Compose** — Database containerization
+* **SQL** — Job market analysis
 
-**Naukri → Selenium → CSV → PostgreSQL → Data Transformation**
-
-The scraper collects job listing information from Naukri and saves it as a CSV file. The CSV data is then loaded into PostgreSQL using Python, where SQL transformations are applied to create a cleaned dataset.
-
-## 🛠️ Tech Stack
-
-- **Python** – Scraping and ETL
-- **Selenium** – Web scraping
-- **PostgreSQL** – Data storage
-- **SQL** – Data transformation
-- **Docker** – PostgreSQL containerization
-- **pgAdmin** – Database management
-- **Git & GitHub** – Version control
-
-## 📂 Project Structure
+## Pipeline Architecture
 
 ```text
-naukri-job-analytics/
-│
-├── data/
-│   └── jobs.csv
-│
-├── sql/
-│   ├── init.sql
-│   └── transformations.sql
-│
-├── main.py
-├── load.py
-├── docker-compose.yml
-├── .env.example
-├── .gitignore
-└── README.md
+Naukri.com
+    ↓
+Python + Selenium
+    ↓
+CSV Data
+    ↓
+PostgreSQL (Docker)
+    ↓
+SQL Analytics
+```
+
+##  Features
+
+* Extracts job titles, company names, ratings, experience, locations, and job URLs.
+* Collects additional details such as salary and skills where available.
+* Exports scraped data to CSV.
+* Loads job records into PostgreSQL for querying and analysis.
+
+##  Getting Started
+
+```bash
+git clone https://github.com/fatemapool99/naukri-job-analytics.git
+cd naukri-job-analytics
+
+python3 -m venv .venv
+source .venv/bin/activate
+
+pip install selenium webdriver-manager pyotp psycopg2-binary python-dotenv
+
+cp .env.example .env
+```
+
+Configure your database credentials in `.env`, then start PostgreSQL:
+
+```bash
+docker compose up -d
+```
+
+Run the scraper and loader:
+
+```bash
+python main.py
+python load.py
+```
+
+Ensure the CSV output path matches the input path expected by `load.py`.
+
+## Analytics Opportunities
+
+* Most in-demand job roles and skills
+* Hiring trends by company and location
+* Salary distribution across roles
+* Experience requirements across job listings
+
+## Future Improvements
+
+* Automated orchestration with Apache Airflow
+* Data validation and deduplication
+* Snowflake integration
+* Power BI dashboard
+
+## Author
+
+**Fatema Poolwala**  [GitHub](https://github.com/fatemapool99)
+
+---
+
+*Built to transform job listings into structured data and actionable insights.*
